@@ -2,16 +2,20 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
+#define LAYER_DEFAULT 0
+#define LAYER_WIN 1
+#define LAYER_LOWER 2
+
 / {
 				// ------------------------------------------------------------------------------------------
-				// |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  10 |  11 |  12 |   13     |
-				// |  14  |  15 |  16 |  17 |  18 |  19 |  20 |  21 |  22 |  23 |  24 |  25 |  26 |    27   |
-				// |   28  |  29 |  30 |  31 |  32 |  33 |  34 |  35 |  36 |  37 |  38 |  39 |      40      |
-				// |    41    |  42 |  43 |  44 |  45 |  46 |  47 |  48 |  49 |  50 |  51  |         52     |
-				// |   53  |   54  |   55  |              56                |   57  |  58   |   59  |   60  |
+				// |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  10 |  11 |  12 |   13     |  14 -> 15 keys
+				// |  15  |  16 |  17 |  18 |  19 |  20 |  21 |  22 |  23 |  24 |  25 |  26 |  27 |    28   |     -> 14 keys
+				// |   29  |  30 |  31 |  32 |  33 |  34 |  35 |  36 |  37 |  38 |  39 |  40 |      41      |     -> 13 keys
+				// |    42    |  43 |  44 |  45 |  46 |  47 |  48 |  49 |  50 |  51 |  52  |         53     |     -> 12 keys
+				// |   54  |   55  |   56  |              57                |   58  |  59   |   60  |   61  |     -> 8 keys
 				// ------------------------------------------------------------------------------------------
 				// ------------------------------------------------------------------------------------------
-				// |     |     |     |     |     |     |     |     |     |     |     |     |     |          |
+				// |     |     |     |     |     |     |     |     |     |     |     |     |     |          |     |
 				// |      |     |     |     |     |     |     |     |     |     |     |     |     |         |
 				// |       |     |     |     |     |     |     |     |     |     |     |     |              |
 				// |          |     |     |     |     |     |     |     |     |     |      |                |
@@ -26,20 +30,39 @@
 				// | TAB  |  Q  |  W  |  E  |  R  |  T  |  Y  |  U  |  I  |  O  |  P  |  [  |  ]  |    |    |
 				// | CAPS  |  A  |  S  |  D  |  F  |  G  |  H  |  J  |  K  |  L  |  ;  |  '  |     ENTER    |
 				// |  SHIFT   |  Z  |  X  |  C  |  V  |  B  |  N  |  M  |  ,  |  .  |  UP  |      SHIFT     |
-				// |  CTL  |  ALT  |  WIN  |            SPACE               |  LEFT | DOWN  | RIGHT |  1    |
+				// |  CTL  |  ALT  |  WIN  |            SPACE               |  LEFT | DOWN  | RIGHT |  LO   |
 				// ------------------------------------------------------------------------------------------
 			bindings = <
 				&kp ESC &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6 &kp N7 &kp  N8   &kp  N9 &kp  N0  &kp MINUS &kp EQUAL &kp BSPC &bt BT_CLR
 				&kp TAB  &kp Q  &kp W  &kp E  &kp R  &kp T  &kp Y  &kp U  &kp  I    &kp  O  &kp  P   &kp LBKT &kp RBKT  &kp BSLH
-				&kp CLCK  &kp A  &kp S  &kp D  &kp F  &kp G  &kp H  &kp J  &kp  K    &kp  L  &kp SEMI &kp SQT           &kp RET
+				&mo LAYER_LOWER &kp A  &kp S  &kp D  &kp F  &kp G  &kp H  &kp J  &kp  K    &kp  L  &kp SEMI &kp SQT           &kp RET
 				&kp LSHFT  &kp Z  &kp X  &kp C  &kp V  &kp B  &kp N  &kp M  &kp COMMA &kp DOT &kp UP             &kp RSHFT
-				&kp LCTRL &kp LALT &kp LGUI            &kp SPACE                          &kp LEFT  &kp DOWN &kp RIGHT &mo 1
+				&kp LCTRL &kp LALT &kp LGUI            &kp SPACE                          &kp LEFT  &kp DOWN &kp RIGHT &mo LAYER_LOWER
 			>;
 			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
 		};
-		raise {
+		
+		win {
 				// ------------------------------------------------------------------------------------------
-				// |     |     |     |     |     |     |     |     |     |     |     |     |     |          |
+				// |     |     |     |     |     |     |     |     |     |     |     |     |     |          |     |
+				// |      |     |     |     |     |     |     |     |     |     |     |     |     |         |
+				// |       |     |     |     |     |     |     |     |     |     |     |     |              |
+				// |          |     |     |     |     |     |     |     |     |     |      |                |
+				// |       |       |       |                                |       |       |       |       |
+				// ------------------------------------------------------------------------------------------
+			bindings = <
+				&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans 
+				&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans 
+				&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans 
+				&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans 
+				&kp LGUI &trans &kp LCTRL &trans &trans &trans &trans &trans 
+			>;
+			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+		};
+		
+		lower {
+				// ------------------------------------------------------------------------------------------
+				// |     |     |     |     |     |     |     |     |     |     |     |     |     |          |     |
 				// |      |     |     |     |     |     |     |     |     |     |     |     |     |         |
 				// |       |     |     |     |     |     |     |     |     |     |     |     |              |
 				// |          |     |     |     |     |     |     |     |     |     |      |                |
@@ -60,8 +83,13 @@
         	compatible = "zmk,combos";
        		combo_capslock {
            		timeout-ms = <50>;
-            		key-positions = <42 43>;
+            		key-positions = <42 53>;
             		bindings = <&kp CLCK>;
+       		 };
+		 combo_swapctrlgui {
+           		timeout-ms = <50>;
+            		key-positions = <54 56>;
+            		bindings = <&tog LAYER_WIN>;
        		 };
    	 };
 };
