@@ -60,8 +60,8 @@
         	compatible = "zmk,combos";
        		combo_capslock {
            		timeout-ms = <50>;
-            		key-positions = <41 52>;
-            		bindings = <&kp CLCK>;
+            		key-positions = <0 1>;
+            		bindings = <&kp A>;
        		 };
    	 };
 };
