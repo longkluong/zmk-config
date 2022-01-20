@@ -110,8 +110,8 @@
 				// ------------------------------------------------------------------------------------------
 			bindings = <
 				&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans 
-				&trans &kp NP_N7 &trans &kp NP_N9 &trans &trans &trans &trans &kp NP_N8 &trans &trans &trans &trans &trans 
-				&kp LCTRL &kp NP_N1 &trans &kp NP_N3 &trans &trans &trans &kp NP_N4 &kp NP_N2 &kp NP_N6 &trans &trans &trans 
+				&trans &kp KP_N7 &trans &kp KP_N9 &trans &trans &trans &trans &kp KP_N8 &trans &trans &trans &trans &trans 
+				&kp LCTRL &kp KP_N1 &trans &kp KP_N3 &trans &trans &trans &kp KP_N4 &kp KP_N2 &kp KP_N6 &trans &trans &trans 
 				&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans 
 				&trans &trans &trans &trans &trans &trans &trans &trans 
 			>;
