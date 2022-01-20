@@ -1,18 +1,21 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
 
 #define LAYER_DEFAULT 0
 #define LAYER_WIN 1
 #define LAYER_LOWER 2
 #define LAYER_NUMPAD 3
+#define LAYER_AUDITION 4
+#define LAYER_SETTING 5
 
 / {
 				// ------------------------------------------------------------------------------------------
-				// |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  10 |  11 |  12 |   13     |  14 -> 15 keys
-				// |  15  |  16 |  17 |  18 |  19 |  20 |  21 |  22 |  23 |  24 |  25 |  26 |  27 |    28   |     -> 14 keys
-				// |   29  |  30 |  31 |  32 |  33 |  34 |  35 |  36 |  37 |  38 |  39 |  40 |      41      |     -> 13 keys
-				// |    42    |  43 |  44 |  45 |  46 |  47 |  48 |  49 |  50 |  51 |  52  |         53     |     -> 12 keys
+				// |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  10 |- 11 |= 12 |   13     |  14 -> 15 keys
+				// |  15  | Q 16|W 17 |E 18 |R 19 |T 20 |Y 21 |U 22 |I 23 |O 24 |P 25 |[ 26 |] 27 |    28   |     -> 14 keys
+				// |   29  |A 30 |S 31 |D 32 |F 33 |G 34 |H 35 |J 36 |K 37 |L 38 |; 39 |' 40 |      41      |     -> 13 keys
+				// |    42    |Z 43 |X 44 |C 45 |V 46 |B 47 |N 48 |M 49 |, 50 |. 51 |/ 52  |         53     |     -> 12 keys
 				// |   54  |   55  |   56  |              57                |   58  |  59   |   60  |   61  |     -> 8 keys
 				// ------------------------------------------------------------------------------------------
 				// ------------------------------------------------------------------------------------------
@@ -64,17 +67,17 @@
 		lower {
 				// ------------------------------------------------------------------------------------------
 				// |  `  |  F1 |  F2 |  F3 |  F4 |  F5 |  F6 |  F7 | F8  |  F9 | F10 | F11 | F12 |   DEL    |     |
-				// |      | HOME|  UP | END | PGUP|     |     |     | INS |     | PS  |  SL |  PB |  RESET  |
-				// |       | LEFT| DOWN|RIGHT| PGDN|     |     |     |     |     |     |     | BOOTLOADER   |
+				// |      | HOME|  UP | END | PGUP|     |     |     | INS |     | PS  |  SL |  PB |         |
+				// |       | LEFT| DOWN|RIGHT| PGDN|     |     |     |     |     |     |     |              |
 				// |          |BR-  |BR+  |     |     |     |     |     | PREV| NEXT| FSLH |                |
-				// |  BT-  |  BT+  |       |            PLAY                | VOL-  |  MUTE |  VOL+ |       |
+				// |       |       |       |            PLAY                | VOL-  |  MUTE |  VOL+ |       |
 				// ------------------------------------------------------------------------------------------
 			bindings = <
 				&kp GRAVE &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6 &kp F7 &kp  F8   &kp  F9 &kp  F10  &kp F11 &kp F12   &kp DEL &trans
-				&trans &kp HOME &kp UP &kp END &kp PG_UP &trans &trans &trans &kp INS &trans &kp PSCRN &kp SLCK &kp PAUSE_BREAK &reset
-				&trans    &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN &trans &trans &trans &trans &trans &trans  &trans   &bootloader
+				&trans &kp HOME &kp UP &kp END &kp PG_UP &trans &trans &trans &kp INS &trans &kp PSCRN &kp SLCK &kp PAUSE_BREAK &trans
+				&trans    &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN &trans &trans &trans &trans &trans &trans  &trans   &trans
 				&trans &kp C_BRI_DN &kp C_BRI_UP &trans &trans &trans &trans &trans &kp C_PREV &kp C_NEXT &kp FSLH  &trans
-				&bt BT_PRV &bt BT_NXT  &trans              &kp C_PP                          &kp C_VOL_DN   &kp C_MUTE  &kp C_VOL_UP &trans
+				&trans &trans &trans             &kp C_PP                 &kp C_VOL_DN   &kp C_MUTE  &kp C_VOL_UP &trans
 			>;
 			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
 		};
@@ -82,16 +85,52 @@
 		numpad {
 				// ------------------------------------------------------------------------------------------
 				// |     |     |     |     |     |     |  ^  |  /  |  *  |  (  |  )  |     |     |          |     |
-				// |      |     |     |     |     |     |  F4 |  7  |  8  |  9  |  -  |     |     |  NUMLK |
-				// |       |     |     |     |     |     |  =  |  4  |  5  |  6  |  +  |     |              |
+				// |      |     | UP  |     |     |     |  F4 |  7  |  8  |  9  |  -  |     |     |  NUMLK |
+				// |       | LEFT| DOWN|RIGHT|     |     |  =  |  4  |  5  |  6  |  +  |     |              |
 				// |          |     |     |     |     |  0  |  1  |  2  |  3  |  .  |  ?   |                |
 				// |       |       |       |                                |       |       |       |       |
 				// ------------------------------------------------------------------------------------------
 			bindings = <
 				&trans &trans &trans &trans &trans &trans &kp LS(N6) &kp KP_SLASH &kp KP_ASTERISK &kp LS(N9) &kp LS(N0) &trans &trans &trans &trans 
-				&trans &trans &trans &trans &trans &trans &kp F4 &kp KP_N7 &kp KP_N8 &kp KP_N9 &kp KP_MINUS &trans &trans &kp KP_NUMLOCK
-				&trans &trans &trans &trans &trans &trans &kp KP_EQUAL &kp KP_N4 &kp KP_N5 &kp KP_N6 &kp KP_PLUS &trans &trans 
+				&trans &trans &kp UP &trans &trans &trans &kp F4 &kp KP_N7 &kp KP_N8 &kp KP_N9 &kp KP_MINUS &trans &trans &kp KP_NUMLOCK
+				&trans &kp LEFT &kp DOWN &kp RIGHT &trans &trans &kp KP_EQUAL &kp KP_N4 &kp KP_N5 &kp KP_N6 &kp KP_PLUS &trans &trans 
 				&trans &trans &trans &trans &trans &kp KP_N0 &kp KP_N1 &kp KP_N2 &kp KP_N3 &kp KP_DOT &kp LS(FSLH) &trans 
+				&trans &trans &trans &trans &trans &trans &trans &trans 
+			>;
+			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+		};
+		
+		audition {
+				// ------------------------------------------------------------------------------------------
+				// |     |     |     |     |     |     |     |     |     |     |     |     |     |          |     |
+				// |      | NP7 |     | NP9 |     |     |     |     | NP8 |     |     |     |     |         |
+				// | LCTL  | NP1 |     | NP3 |     |     |     | NP4 | NP2 | NP6 |     |     |              |
+				// |          |     |     |     |     |     |     |     |     |     |      |                |
+				// |       |       |       |                                |       |       |       |       |
+				// ------------------------------------------------------------------------------------------
+			bindings = <
+				&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans 
+				&trans &kp NP_N7 &trans &kp NP_N9 &trans &trans &trans &trans &kp NP_N8 &trans &trans &trans &trans &trans 
+				&kp LCTRL &kp NP_N1 &trans &kp NP_N3 &trans &trans &trans &kp NP_N4 &kp NP_N2 &kp NP_N6 &trans &trans &trans 
+				&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans 
+				&trans &trans &trans &trans &trans &trans &trans &trans 
+			>;
+			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+		};
+		
+		setting {
+				// ------------------------------------------------------------------------------------------
+				// |     | BT0 | BT1 | BT2 | BT3 | BT4 |     |     |     |     |     |     |     |          |     |
+				// |      |     |     |     |     |     |     | USB |     |     |     |     |     | RESET   |
+				// |       |     |     |     |     |     |     |     |     |     |     |     |  BOOTLOADER  |
+				// |          | BT+ | BT- |BTCLR|     | BLE |     |     |     |     |      |                |
+				// |       |       |       |                                |       |       |       |       |
+				// ------------------------------------------------------------------------------------------
+			bindings = <
+				&trans &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &trans &trans &trans &trans &trans &trans &trans &trans &trans 
+				&trans &trans &trans &trans &trans &trans &trans &out OUT_USB &trans &trans &trans &trans &trans &reset
+				&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &bootloader
+				&trans &bt BT_PRV &bt BT_NXT  &bt BT_CLR &trans &out OUT_BLE &trans &trans &trans &trans &trans &trans 
 				&trans &trans &trans &trans &trans &trans &trans &trans 
 			>;
 			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
@@ -100,25 +139,46 @@
 	
 	combos {
         	compatible = "zmk,combos";
+		// Press LShift + RShift to toggle Capslock
        		combo_capslock {
            		timeout-ms = <50>;
             		key-positions = <42 53>;
             		bindings = <&kp CLCK>;
        		 };
+		 
+		 // Press LCtrl + LGUI to switch
 		 combo_swapctrlgui {
            		timeout-ms = <50>;
             		key-positions = <54 56>;
             		bindings = <&tog LAYER_WIN>;
        		 };
+		 
+		 // Press JK to toggle layer Numpad
 		 combo_numpad {
            		timeout-ms = <50>;
             		key-positions = <36 37>;
             		bindings = <&tog LAYER_NUMPAD>;
        		 };
+		 
+		 // Press ESC + Backspace = Power button
 		 combo_power {
            		timeout-ms = <50>;
             		key-positions = <0 13>;
             		bindings = <&kp C_POWER>;
+       		 };
+		 
+		 // Press DF to toggle layer audition
+		 combo_audition {
+           		timeout-ms = <50>;
+            		key-positions = <32 33>;
+            		bindings = <&tog LAYER_AUDITION>;
+       		 };
+		 
+		 // Press QP to toggle layer setting
+		 combo_audition {
+           		timeout-ms = <50>;
+            		key-positions = <16 25>;
+            		bindings = <&tog LAYER_SETTING>;
        		 };
    	 };
 };
