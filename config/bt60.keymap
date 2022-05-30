@@ -154,31 +154,31 @@
        		 };
 		 
 		 // Press JK to toggle layer Numpad
-		 combo_numpad {
-           		timeout-ms = <50>;
-            		key-positions = <36 37>;
-            		bindings = <&tog LAYER_NUMPAD>;
-       		 };
+		 //combo_numpad {
+           	//	timeout-ms = <50>;
+            	//	key-positions = <36 37>;
+            	//	bindings = <&tog LAYER_NUMPAD>;
+       		 //};
 		 
 		 // Press ESC + Backspace = Power button
-		 combo_power {
-           		timeout-ms = <50>;
-            		key-positions = <0 13>;
-            		bindings = <&kp C_POWER>;
-       		 };
+		 //combo_power {
+           	//	timeout-ms = <50>;
+            	//	key-positions = <0 13>;
+            	//	bindings = <&kp C_POWER>;
+       		 //};
 		 
 		 // Press DF to toggle layer audition
-		 combo_audition {
-           		timeout-ms = <50>;
-            		key-positions = <32 33>;
-            		bindings = <&tog LAYER_AUDITION>;
-       		 };
+		 //combo_audition {
+           	//	timeout-ms = <50>;
+            	//	key-positions = <32 33>;
+            	//	bindings = <&tog LAYER_AUDITION>;
+       		 //};
 		 
 		 // Press QP to toggle layer setting
-		 combo_setting {
-           		timeout-ms = <50>;
-            		key-positions = <16 25>;
-            		bindings = <&tog LAYER_SETTING>;
-       		 };
+		 //combo_setting {
+           	//	timeout-ms = <50>;
+            	//	key-positions = <16 25>;
+            //		bindings = <&tog LAYER_SETTING>;
+       		// };
    	 };
 };
