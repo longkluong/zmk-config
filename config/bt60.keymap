@@ -19,7 +19,7 @@
         raise {
             bindings = <
 &kp GRAVE  &kp F1            &kp F2        &kp F3             &kp F4  &kp F5  &kp F6  &kp F7      &kp F8    &kp F9     &kp F10  &kp F11  &kp F12  &kp DEL  &trans
-&trans     &trans            &kp LC(UP)    &trans             &trans  &trans  &trans  &trans      &kp UP    &trans     &trans   &trans   &trans   &trans
+&trans     &trans            &kp LC(UP)    &trans             &trans  &trans  &trans  &kp N8      &kp UP    &trans     &trans   &trans   &trans   &trans
 &trans     &kp LA(LC(LEFT))  &kp LC(DOWN)  &kp LC(LA(RIGHT))  &trans  &trans  &trans  &kp LEFT    &kp DOWN  &kp RIGHT  &trans   &trans            &trans
 &trans     &trans            &trans        &trans             &trans  &trans  &trans  &kp C_MUTE  &trans    &trans     &trans                     &trans
 &trans     &trans            &trans                                           &trans                                   &trans   &trans   &trans   &trans
